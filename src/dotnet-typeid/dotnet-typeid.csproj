@@ -18,7 +18,6 @@
         <PackageTags>guid uuid id typeid type-id</PackageTags>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <DocumentationFile>TcKs.TypeId.xml</DocumentationFile>
-        <PackageReadmeFile>../README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
