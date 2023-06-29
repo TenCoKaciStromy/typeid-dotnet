@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TcKs.TypeId</name>
+    </assembly>
+    <members>
+        <member name="T:TcKs.TypeId.TypeId">
+            <summary>
+            Represents typed id.
+            </summary>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.#ctor(System.String,System.Guid)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="type">The type of id.</param>
+            <param name="id">The id.</param>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.NewId(System.String)">
+            <summary>
+            Creates new unique id for specified <paramref name="type"/>.
+            </summary>
+            <param name="type">The type of id.</param>
+            <returns>
+            New unique typed id.
+            </returns>
+        </member>
+        <member name="P:TcKs.TypeId.TypeId.Type">
+            <summary>
+            The type of id.
+            </summary>
+        </member>
+        <member name="P:TcKs.TypeId.TypeId.Id">
+            <summary>
+            The id.
+            </summary>
+        </member>
+        <member name="P:TcKs.TypeId.TypeId.IsEmpty">
+            <summary>
+            Returns true if <see cref="P:TcKs.TypeId.TypeId.Id"/> is empty (Guid.Empty).
+            </summary>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.ToString">
+            <summary>
+            Returns string representation of this typed id.
+            The <see cref="P:TcKs.TypeId.TypeId.Id"/> is encoded as a 26-character string in base32 (using Crockford's alphabet in lowercase).
+            </summary>
+            <example>
+              user_2x4y6z8a0b1c2d3e4f5g6h7j8k
+              └──┘ └────────────────────────┘
+              type    uuid suffix (base32)
+            </example>
+            <returns>
+            String representation of this typed id.
+            </returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.op_Explicit(TcKs.TypeId.TypeId)~System.Guid">
+            <summary>
+            The type id can be casted to <see cref="T:System.Guid"/>.
+            </summary>
+            <param name="self"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.GetHashCode">
+            <summary>
+            Returns hash code of this typed id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.Equals(TcKs.TypeId.TypeId)">
+            <summary>
+            Returns true if both this typed id and <paramref name="other"/> are equals.
+            Otherwise returns false.
+            </summary>
+            <param name="other">
+            The other typed id.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.Equals(System.Object)">
+            <summary>
+            Returns true if both this typed id and <paramref name="obj"/> are equals.
+            Otherwise returns false.
+            </summary>
+            <param name="obj">
+            The other typed id.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.op_Equality(TcKs.TypeId.TypeId,TcKs.TypeId.TypeId)">
+            <summary>
+            Returns true if <paramref name="a"/> and <paramref name="b"/> are equal.
+            Otherwise returns false.
+            </summary>
+            <param name="a">Left operand.</param>
+            <param name="b">Right operand.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.op_Inequality(TcKs.TypeId.TypeId,TcKs.TypeId.TypeId)">
+            <summary>
+            Returns false if <paramref name="a"/> and <paramref name="b"/> are equal.
+            Otherwise returns true.
+            </summary>
+            <param name="a">Left operand.</param>
+            <param name="b">Right operand.</param>
+            <returns></returns>
+        </member>
+        <member name="F:TcKs.TypeId.TypeId.PartsSeparator">
+            <summary>
+            The separator for type part and id part.
+            </summary>
+        </member>
+        <member name="F:TcKs.TypeId.TypeId.IdPartLength">
+            <summary>
+            The length of the id part.
+            </summary>
+        </member>
+        <member name="F:TcKs.TypeId.TypeId.MinTotalLength">
+            <summary>
+            The minimal lenght of parseable string.
+            We support empty type. 
+            </summary>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.Parse(System.String)">
+            <summary>
+            Parses string to <see cref="T:TcKs.TypeId.TypeId"/>.
+            </summary>
+            <param name="input">
+            String input to parse.
+            </param>
+            <returns>
+            Parsed <see cref="T:TcKs.TypeId.TypeId"/>.
+            </returns>
+            <exception cref="T:System.FormatException">
+            Thrown if <paramref name="input"/> can not be parsed.
+            </exception>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.TryParse(System.String,TcKs.TypeId.TypeId@)">
+            <summary>
+            Returns true if <paramref name="input"/> is successfully parsed.
+            Otherwise return true.
+            </summary>
+            <param name="input">
+            String input to parse.
+            </param>
+            <param name="result">
+            Contains result of parsing.
+            If parsing fails, the default value will be there.
+            </param>
+            <returns>
+            True if parsing was successfull.
+            Otherwise false.
+            </returns>
+        </member>
+    </members>
+</doc>

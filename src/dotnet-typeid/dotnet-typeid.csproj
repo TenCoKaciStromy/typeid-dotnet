@@ -6,6 +6,18 @@
         <AssemblyName>TcKs.TypeId</AssemblyName>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>TcKs.TypeId</Title>
+        <Authors>Jakub (TcKs) Müller</Authors>
+        <Description>The .NET implementation of TypeID.</Description>
+        <Copyright>Copyright 2023 Jakub (TcKs) Müller</Copyright>
+        <PackageProjectUrl>https://github.com/TenCoKaciStromy/typeid-dotnet</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/TenCoKaciStromy/typeid-dotnet</RepositoryUrl>
+        <RepositoryType>github</RepositoryType>
+        <PackageTags>guid uuid id typeid type-id</PackageTags>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <DocumentationFile>TcKs.TypeId.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>

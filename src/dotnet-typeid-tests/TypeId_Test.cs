@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
 using TcKs.TypeId;
 using Xunit;
@@ -38,13 +39,16 @@ public class TypeId_Test {
   }
 
   [Fact]
+  [SuppressMessage("ReSharper", "EqualExpressionComparison")]
   public void EqualsWorks() {
     var user0 = TypeId.NewId("user");
     var user1 = TypeId.NewId("user");
     
     Assert.Equal(user0, user0);
+    #pragma warning disable CS1718
     Assert.True(user0 == user0);
     Assert.False(user0 != user0);
+    #pragma warning restore CS1718
     
     Assert.NotEqual(user0, user1);
     Assert.False(user0 == user1);
