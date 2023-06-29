@@ -8,3 +8,12 @@ as the primary identifiers for your data in a database, APIs, and distributed sy
 Read more about TypeIDs in their [spec](https://github.com/jetpack-io/typeid).
 
 This particular implementation provides a DotNet library for generating and parsing TypeIDs.
+
+### NuGet
+[NuGet page](https://www.nuget.org/packages/TcKs.TypeId/)
+
+.NET CLI
+
+```
+dotnet add package TcKs.TypeId`
+```
