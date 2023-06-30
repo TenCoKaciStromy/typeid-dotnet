@@ -6,6 +6,11 @@ namespace TcKs.TypeId;
 
 partial struct TypeId {
   /// <summary>
+  /// The maximum length of prefix.
+  /// </summary>
+  public const int MaxPrefixLength = 63;
+  
+  /// <summary>
   /// The separator for type part and id part.
   /// </summary>
   public const char PartsSeparator = '_';
@@ -20,6 +25,11 @@ partial struct TypeId {
   /// We support empty type. 
   /// </summary>
   public const int MinTotalLength = IdPartLength + 1;
+
+  /// <summary>
+  /// Allowed characters for type prefix.
+  /// </summary>
+  public const string AllowedPrefixCharacters = "abcdefghijklmnopqrstuvwxyz";
 
   /// <summary>
   /// Parses string to <see cref="TypeId"/>.
@@ -62,13 +72,19 @@ partial struct TypeId {
       return Fail(out result);
 
     var ndxSeparator = input.IndexOf(PartsSeparator);
-    if (ndxSeparator < 0)
+    if (ndxSeparator is < 0 or > MaxPrefixLength)
       return Fail(out result);
 
     var ndxId = ndxSeparator + 1;
     var idLength = inputLength - ndxId;
     if (idLength != IdPartLength)
       return Fail(out result);
+
+    var prefix = input.Substring(0, ndxSeparator);
+    for (var i = prefix.Length - 1; i >= 0; i--) {
+      if (!AllowedPrefixCharacters.Contains(prefix[i]))
+        return Fail(out result);
+    }
 
     var idPart = input.AsMemory().Slice(ndxId).Span;
     var bytes = new byte[16];

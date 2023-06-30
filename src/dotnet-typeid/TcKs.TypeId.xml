@@ -35,6 +35,11 @@
             The id.
             </summary>
         </member>
+        <member name="P:TcKs.TypeId.TypeId.Suffix">
+            <summary>
+            The id encoded as a 26-character string in base32 (using Crockford's alphabet in lowercase).
+            </summary>
+        </member>
         <member name="P:TcKs.TypeId.TypeId.IsEmpty">
             <summary>
             Returns true if <see cref="P:TcKs.TypeId.TypeId.Id"/> is empty (Guid.Empty).
@@ -105,6 +110,11 @@
             <param name="b">Right operand.</param>
             <returns></returns>
         </member>
+        <member name="F:TcKs.TypeId.TypeId.MaxPrefixLength">
+            <summary>
+            The maximum length of prefix.
+            </summary>
+        </member>
         <member name="F:TcKs.TypeId.TypeId.PartsSeparator">
             <summary>
             The separator for type part and id part.
@@ -119,6 +129,11 @@
             <summary>
             The minimal lenght of parseable string.
             We support empty type. 
+            </summary>
+        </member>
+        <member name="F:TcKs.TypeId.TypeId.AllowedPrefixCharacters">
+            <summary>
+            Allowed characters for type prefix.
             </summary>
         </member>
         <member name="M:TcKs.TypeId.TypeId.Parse(System.String)">

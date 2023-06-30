@@ -18,6 +18,8 @@
         <PackageTags>guid uuid id typeid type-id</PackageTags>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <DocumentationFile>TcKs.TypeId.xml</DocumentationFile>
+        <Version>1.0.1</Version>
+        <PackageReleaseNotes>Parsing is more strict now.</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
