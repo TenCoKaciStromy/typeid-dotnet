@@ -44,6 +44,12 @@ public readonly partial struct TypeId {
     => id;
 
   /// <summary>
+  /// The id encoded as a 26-character string in base32 (using Crockford's alphabet in lowercase).
+  /// </summary>
+  public string Suffix
+    => Base32.Crockford.Encode(id.ToByteArray().AsSpan()).ToLower();
+
+  /// <summary>
   /// Returns true if <see cref="Id"/> is empty (Guid.Empty).
   /// </summary>
   public bool IsEmpty
@@ -61,12 +67,8 @@ public readonly partial struct TypeId {
   /// <returns>
   /// String representation of this typed id.
   /// </returns>
-  public override string ToString() {
-    var bytes = id.ToByteArray();
-    var text = Base32.Crockford.Encode(bytes.AsSpan());
-
-    return $"{Type}_{text}";
-  }
+  public override string ToString()
+    => $"{Type}_{Suffix}";
 
   /// <summary>
   /// The type id can be casted to <see cref="Guid"/>.
