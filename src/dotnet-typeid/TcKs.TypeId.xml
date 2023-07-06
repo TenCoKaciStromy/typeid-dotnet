@@ -4,6 +4,11 @@
         <name>TcKs.TypeId</name>
     </assembly>
     <members>
+        <member name="T:TcKs.TypeId.Base32">
+            <summary>
+            Reimplemented Base32 encoding/decoding from original go code: https://github.com/jetpack-io/typeid-go/blob/main/base32/base32.go
+            </summary>
+        </member>
         <member name="T:TcKs.TypeId.TypeId">
             <summary>
             Represents typed id.
@@ -66,50 +71,6 @@
             <param name="self"></param>
             <returns></returns>
         </member>
-        <member name="M:TcKs.TypeId.TypeId.GetHashCode">
-            <summary>
-            Returns hash code of this typed id.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TcKs.TypeId.TypeId.Equals(TcKs.TypeId.TypeId)">
-            <summary>
-            Returns true if both this typed id and <paramref name="other"/> are equals.
-            Otherwise returns false.
-            </summary>
-            <param name="other">
-            The other typed id.
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:TcKs.TypeId.TypeId.Equals(System.Object)">
-            <summary>
-            Returns true if both this typed id and <paramref name="obj"/> are equals.
-            Otherwise returns false.
-            </summary>
-            <param name="obj">
-            The other typed id.
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:TcKs.TypeId.TypeId.op_Equality(TcKs.TypeId.TypeId,TcKs.TypeId.TypeId)">
-            <summary>
-            Returns true if <paramref name="a"/> and <paramref name="b"/> are equal.
-            Otherwise returns false.
-            </summary>
-            <param name="a">Left operand.</param>
-            <param name="b">Right operand.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TcKs.TypeId.TypeId.op_Inequality(TcKs.TypeId.TypeId,TcKs.TypeId.TypeId)">
-            <summary>
-            Returns false if <paramref name="a"/> and <paramref name="b"/> are equal.
-            Otherwise returns true.
-            </summary>
-            <param name="a">Left operand.</param>
-            <param name="b">Right operand.</param>
-            <returns></returns>
-        </member>
         <member name="F:TcKs.TypeId.TypeId.MaxPrefixLength">
             <summary>
             The maximum length of prefix.
@@ -166,6 +127,50 @@
             True if parsing was successfull.
             Otherwise false.
             </returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.GetHashCode">
+            <summary>
+            Returns hash code of this typed id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.Equals(TcKs.TypeId.TypeId)">
+            <summary>
+            Returns true if both this typed id and <paramref name="other"/> are equals.
+            Otherwise returns false.
+            </summary>
+            <param name="other">
+            The other typed id.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.Equals(System.Object)">
+            <summary>
+            Returns true if both this typed id and <paramref name="obj"/> are equals.
+            Otherwise returns false.
+            </summary>
+            <param name="obj">
+            The other typed id.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.op_Equality(TcKs.TypeId.TypeId,TcKs.TypeId.TypeId)">
+            <summary>
+            Returns true if <paramref name="a"/> and <paramref name="b"/> are equal.
+            Otherwise returns false.
+            </summary>
+            <param name="a">Left operand.</param>
+            <param name="b">Right operand.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TcKs.TypeId.TypeId.op_Inequality(TcKs.TypeId.TypeId,TcKs.TypeId.TypeId)">
+            <summary>
+            Returns false if <paramref name="a"/> and <paramref name="b"/> are equal.
+            Otherwise returns true.
+            </summary>
+            <param name="a">Left operand.</param>
+            <param name="b">Right operand.</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -1,6 +1,4 @@
 using System;
-using System.Security.Cryptography;
-using SimpleBase;
 
 namespace TcKs.TypeId; 
 
@@ -29,7 +27,7 @@ public readonly partial struct TypeId {
   /// New unique typed id.
   /// </returns>
   public static TypeId NewId(string type)
-    => new(type, Guid.NewGuid());
+    => new(type, UUIDNext.Uuid.NewSequential());
 
   /// <summary>
   /// The type of id.
@@ -47,7 +45,7 @@ public readonly partial struct TypeId {
   /// The id encoded as a 26-character string in base32 (using Crockford's alphabet in lowercase).
   /// </summary>
   public string Suffix
-    => Base32.Crockford.Encode(id.ToByteArray().AsSpan()).ToLower();
+    => Base32.Encode(id.ToByteArray()).ToLower();
 
   /// <summary>
   /// Returns true if <see cref="Id"/> is empty (Guid.Empty).

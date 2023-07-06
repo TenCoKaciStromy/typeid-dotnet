@@ -1,8 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.Http.Headers;
-using SimpleBase;
 using TcKs.TypeId;
+using UUIDNext;
 using Xunit;
 
 namespace dotnet_typeid_tests;
@@ -19,7 +18,7 @@ public class TypeId_Test {
 
   [Fact]
   public void ConstructorWorks() {
-    var id = Guid.NewGuid();
+    var id = Uuid.NewSequential();
     var value = new TypeId("user", id);
     
     Assert.Equal("user", value.Type);
@@ -29,14 +28,20 @@ public class TypeId_Test {
 
   [Fact]
   public void CanFormatAndParse() {
-    var id = Guid.NewGuid();
-
+    var id = Uuid.NewDatabaseFriendly(Database.PostgreSql);
+  
     var value0 = new TypeId("user", id);
     var text0 = value0.ToString();
-
+  
     var value1 = TypeId.Parse(text0);
     Assert.Equal(value0.Type, value1.Type);
     Assert.Equal(value0.Id, value1.Id);
+  }
+
+  [Fact]
+  public void ParsingWillFailWhen128BitOverflow() {
+    Assert.False(TypeId.TryParse("prefix_80041061050r3gg28a1c60t3gg", out _));
+    Assert.False(TypeId.TryParse("prefix_8zzzzzzzzzzzzzzzzzzzzzzzzz", out _));
   }
 
   [Fact]

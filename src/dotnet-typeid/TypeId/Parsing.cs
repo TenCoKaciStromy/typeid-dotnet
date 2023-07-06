@@ -1,6 +1,4 @@
 using System;
-using System.Security.Cryptography;
-using SimpleBase;
 
 namespace TcKs.TypeId; 
 
@@ -87,11 +85,16 @@ partial struct TypeId {
     }
 
     var idPart = input.AsMemory().Slice(ndxId).Span;
-    var bytes = new byte[16];
-    if (!Base32.Crockford.TryDecode(idPart, bytes.AsSpan(), out var numBytesWritten) || numBytesWritten != 16)
+    
+    // Check for overflow.
+    if (idPart[0] is < '0' or > '7') {
+      return Fail(out result);
+    }
+
+    if (Base32.TryDecode(idPart, out var idBytes) is false || idBytes is null)
       return Fail(out result);
 
-    result = new(input.Substring(0, ndxSeparator), new Guid(bytes));
+    result = new(input.Substring(0, ndxSeparator), new Guid(idBytes));
     return true;
     
     static bool Fail(out TypeId result) {
