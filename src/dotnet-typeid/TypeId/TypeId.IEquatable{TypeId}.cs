@@ -1,6 +1,4 @@
 using System;
-using System.Security.Cryptography;
-using SimpleBase;
 
 namespace TcKs.TypeId; 
 

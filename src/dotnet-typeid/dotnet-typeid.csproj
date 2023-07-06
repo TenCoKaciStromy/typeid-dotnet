@@ -18,12 +18,14 @@
         <PackageTags>guid uuid id typeid type-id</PackageTags>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <DocumentationFile>TcKs.TypeId.xml</DocumentationFile>
-        <Version>1.0.1</Version>
+        <Version>1.1.0</Version>
         <PackageReleaseNotes>Parsing is more strict now.</PackageReleaseNotes>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SimpleBase" Version="4.0.0" />
+      <PackageReference Include="UUIDNext" Version="2.0.2" />
+      <None Include="../../README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
