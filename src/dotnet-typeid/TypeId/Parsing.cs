@@ -94,7 +94,9 @@ partial struct TypeId {
     if (Base32.TryDecode(idPart, out var idBytes) is false || idBytes is null)
       return Fail(out result);
 
-    result = new(input.Substring(0, ndxSeparator), new Guid(idBytes));
+    var uuidBytes = SwapEndians(idBytes);
+
+    result = new(input.Substring(0, ndxSeparator), new(uuidBytes));
     return true;
     
     static bool Fail(out TypeId result) {

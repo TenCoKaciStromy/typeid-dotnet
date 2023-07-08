@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-typeid", "dotnet-typ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-typeid-tests", "dotnet-typeid-tests\dotnet-typeid-tests.csproj", "{F992F5C2-1565-469B-8BA2-B6057692C738}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-typeid-cli", "dotnet-typeid-cli\dotnet-typeid-cli.csproj", "{D6E4158D-6D73-424F-B1B2-DB06C1D64CBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{F992F5C2-1565-469B-8BA2-B6057692C738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F992F5C2-1565-469B-8BA2-B6057692C738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F992F5C2-1565-469B-8BA2-B6057692C738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6E4158D-6D73-424F-B1B2-DB06C1D64CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E4158D-6D73-424F-B1B2-DB06C1D64CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E4158D-6D73-424F-B1B2-DB06C1D64CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E4158D-6D73-424F-B1B2-DB06C1D64CBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

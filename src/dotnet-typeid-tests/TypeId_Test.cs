@@ -27,6 +27,15 @@ public class TypeId_Test {
   }
 
   [Fact]
+  public void ParseWorks() {
+    var tid = TypeId.Parse("prefix_01h2xcejqtf2nbrexx3vqjhp41");
+    
+    Assert.Equal("prefix", tid.Type);
+    Assert.Equal("01h2xcejqtf2nbrexx3vqjhp41", tid.Suffix);
+    Assert.Equal(Guid.Parse("0188bac7-4afa-78aa-bc3b-bd1eef28d881"), tid.Id);
+  }
+
+  [Fact]
   public void CanFormatAndParse() {
     var id = Uuid.NewDatabaseFriendly(Database.PostgreSql);
   

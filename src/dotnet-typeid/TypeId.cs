@@ -45,7 +45,7 @@ public readonly partial struct TypeId {
   /// The id encoded as a 26-character string in base32 (using Crockford's alphabet in lowercase).
   /// </summary>
   public string Suffix
-    => Base32.Encode(id.ToByteArray()).ToLower();
+    => Base32.Encode(GetUuid().ToByteArray()).ToLower();
 
   /// <summary>
   /// Returns true if <see cref="Id"/> is empty (Guid.Empty).
