@@ -3,6 +3,10 @@ using System;
 namespace TcKs.TypeId; 
 
 partial struct TypeId {
+  /// <summary>
+  /// Returns <see cref="Id"/> transformed to little-endian form for UUID standard.
+  /// </summary>
+  /// <returns></returns>
   public Guid GetUuid()
     => SwapEndians(Id);
 
