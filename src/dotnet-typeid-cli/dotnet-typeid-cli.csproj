@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>TcKs.TypeId.Cli</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>typeid</AssemblyName>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <PackAsTool>true</PackAsTool>
+        <ToolCommandName>typeid</ToolCommandName>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>TcKs.TypeId.Cli</Title>
+        <Authors>Jakub (TcKs) Müller</Authors>
+        <Description>The command line interface for .NET implementation of TypeID.</Description>
+        <Copyright>Copyright 2023 Jakub (TcKs) Müller</Copyright>
+        <PackageProjectUrl>https://github.com/TenCoKaciStromy/typeid-dotnet</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/TenCoKaciStromy/typeid-dotnet</RepositoryUrl>
+        <RepositoryType>github</RepositoryType>
+        <PackageTags>guid uuid id typeid type-id cli</PackageTags>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <Version>1.2.0</Version>
+        <PackageReleaseNotes>First public release of CLI of .NET TypeID.</PackageReleaseNotes>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\dotnet-typeid\dotnet-typeid.csproj" />
+        <None Include="../../README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Using Include="TcKs.TypeId" />
+    </ItemGroup>
+
+</Project>

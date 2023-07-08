@@ -172,5 +172,11 @@
             <param name="b">Right operand.</param>
             <returns></returns>
         </member>
+        <member name="M:TcKs.TypeId.TypeId.GetUuid">
+            <summary>
+            Returns <see cref="P:TcKs.TypeId.TypeId.Id"/> transformed to little-endian form for UUID standard.
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>
