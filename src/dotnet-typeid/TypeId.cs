@@ -89,6 +89,9 @@ public readonly partial struct TypeId {
   public string Suffix
     => text?.Substring(separatorIndex + 1) ?? string.Empty;
 
+  /// <summary>
+  /// Returns slice of memory with characters of <see cref="Suffix"/>.
+  /// </summary>
   public ReadOnlyMemory<char> SuffixChars
     => text?.AsMemory().Slice(separatorIndex + 1) ?? default;
 

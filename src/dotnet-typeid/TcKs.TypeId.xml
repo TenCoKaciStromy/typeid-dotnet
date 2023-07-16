@@ -57,6 +57,11 @@
             The id encoded as a 26-character string in base32 (using Crockford's alphabet in lowercase).
             </summary>
         </member>
+        <member name="P:TcKs.TypeId.TypeId.SuffixChars">
+            <summary>
+            Returns slice of memory with characters of <see cref="P:TcKs.TypeId.TypeId.Suffix"/>.
+            </summary>
+        </member>
         <member name="P:TcKs.TypeId.TypeId.IsEmpty">
             <summary>
             Returns true if <see cref="P:TcKs.TypeId.TypeId.Id"/> is empty (Guid.Empty).

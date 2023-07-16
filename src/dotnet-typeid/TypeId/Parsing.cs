@@ -96,28 +96,6 @@ partial struct TypeId {
     return true;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static bool IdCharIsValid(char ch) {
-      if (ch >= '0' && ch <= '9')
-        return true;
-
-      if (ch >= 'a' && ch <= 'z') {
-        return ch != 'i'
-               && ch != 'l'
-               && ch != 'o'
-               && ch != 'u';
-      }
-
-      return false;
-    }
-    // static bool IdCharIsValid(char ch)
-    //   => ch is >= '0' and <= '9'
-    //      || ch is >= 'a' and <= 'h'
-    //      || ch is >= 'j' and <= 'k'
-    //      || ch is >= 'm' and <= 'n'
-    //      || ch is >= 'p' and <= 't'
-    //      || ch is >= 'v' and <= 'z';
-      
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static bool Fail(out TypeId result) {
       result = default;
       return false;
