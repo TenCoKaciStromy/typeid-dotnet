@@ -62,17 +62,10 @@ partial struct TypeId {
   /// True if parsing was successfull.
   /// Otherwise false.
   /// </returns>
-  public static bool TryParse(string input, out TypeId result) {
-    if (input is null) {
-      result = default;
-      return false;
-    }
+  public static bool TryParse(string input, out TypeId result)
+    => TryParse(input.AsMemory(), out result);
 
-    var chars = input.ToCharArray();
-    return TryParseNoAlloc(chars, out result);
-  }
-
-  public static bool TryParseNoAlloc(ReadOnlyMemory<char> input, out TypeId result) {
+  public static bool TryParse(ReadOnlyMemory<char> input, out TypeId result) {
     var inputLength = input.Length;
     if (inputLength < MinTotalLength)
       return Fail(out result);
@@ -104,8 +97,6 @@ partial struct TypeId {
       return Fail(out result);
     }
 
-    // if (Base32.TryDecode(idPart, out var idBytes) is false || idBytes is null)
-    //   return Fail(out result);
     Span<byte> idBytes = stackalloc byte[16];
     if (Base32.TryDecode(idPart, idBytes) is false)
       return Fail(out result);

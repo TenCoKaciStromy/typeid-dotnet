@@ -93,11 +93,5 @@ partial class Base32 {
          && decBytes[inputBytes[23]] != 0xFF
          && decBytes[inputBytes[24]] != 0xFF
          && decBytes[inputBytes[25]] != 0xFF;
-    
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static bool Fail(out byte[]? output) {
-      output = default!;
-      return false;
-    }
   }
 }

@@ -1,0 +1,35 @@
+// * Summary *
+
+BenchmarkDotNet v0.13.6, Ubuntu 22.04.2 LTS (Jammy Jellyfish)
+Intel Core i7-10875H CPU 2.30GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 6.0.120
+  [Host]     : .NET 6.0.20 (6.0.2023.32301), X64 RyuJIT AVX2
+  DefaultJob : .NET 6.0.20 (6.0.2023.32301), X64 RyuJIT AVX2
+
+
+|          Method | Iterations | PrefixLength |      Mean |    Error |   StdDev | Allocated |
+|---------------- |----------- |------------- |----------:|---------:|---------:|----------:|
+|           NewId |    1000000 |            5 | 757.54 ms | 8.425 ms | 7.881 ms |     976 B |
+|        TryParse |    1000000 |            5 |  91.26 ms | 0.616 ms | 0.577 ms |     275 B |
+| TryParseNoAlloc |    1000000 |            5 |  91.99 ms | 0.378 ms | 0.353 ms |     275 B |
+|           NewId |    1000000 |           10 | 752.07 ms | 4.631 ms | 4.332 ms |    2720 B |
+|        TryParse |    1000000 |           10 |  97.48 ms | 0.119 ms | 0.112 ms |     275 B |
+| TryParseNoAlloc |    1000000 |           10 |  97.61 ms | 0.359 ms | 0.336 ms |     275 B |
+|           NewId |    1000000 |           63 | 750.98 ms | 3.452 ms | 3.229 ms |    1512 B |
+|        TryParse |    1000000 |           63 | 141.11 ms | 0.325 ms | 0.288 ms |     412 B |
+| TryParseNoAlloc |    1000000 |           63 | 141.07 ms | 0.093 ms | 0.083 ms |     412 B |
+
+// * Hints *
+Outliers
+  TypeIdBenchmarks.NewId: Default           -> 1 outlier  was  detected (741.31 ms)
+  TypeIdBenchmarks.TryParse: Default        -> 1 outlier  was  removed (167.84 ms)
+  TypeIdBenchmarks.TryParseNoAlloc: Default -> 1 outlier  was  removed (141.30 ms)
+
+// * Legends *
+  Iterations   : Value of the 'Iterations' parameter
+  PrefixLength : Value of the 'PrefixLength' parameter
+  Mean         : Arithmetic mean of all measurements
+  Error        : Half of 99.9% confidence interval
+  StdDev       : Standard deviation of all measurements
+  Allocated    : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ms         : 1 Millisecond (0.001 sec)

@@ -51,9 +51,10 @@ public class TypeIdBenchmarks {
   public TypeId TryParse()
   {
     TypeId typeId = default;
-    foreach (var str in typeIdStrings!)
-    {
-      TypeId.TryParse(str, out typeId);
+
+    var arr = typeIdStrings!;
+    for (var i = arr.Length - 1; i >= 0; i--) {
+      TypeId.TryParse(arr[i], out typeId);
     }
         
     return typeId;

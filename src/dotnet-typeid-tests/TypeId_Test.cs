@@ -21,7 +21,7 @@ public class TypeId_Test {
     var id = Uuid.NewSequential();
     var value = new TypeId("user", id);
     
-    Assert.Equal("user", value.TypeString);
+    Assert.Equal("user", value.Type);
     Assert.Equal(id, value.Id);
     Assert.False(value.IsEmpty);
   }
@@ -30,7 +30,7 @@ public class TypeId_Test {
   public void ParseWorks() {
     var tid = TypeId.Parse("prefix_01h2xcejqtf2nbrexx3vqjhp41");
     
-    Assert.Equal("prefix", tid.TypeString);
+    Assert.Equal("prefix", tid.Type);
     Assert.Equal("01h2xcejqtf2nbrexx3vqjhp41", tid.Suffix);
     Assert.Equal(Guid.Parse("0188bac7-4afa-78aa-bc3b-bd1eef28d881"), tid.Id);
   }
@@ -43,7 +43,7 @@ public class TypeId_Test {
     var text0 = value0.ToString();
   
     var value1 = TypeId.Parse(text0);
-    Assert.Equal(value0.TypeString, value1.TypeString);
+    Assert.Equal(value0.Type, value1.Type);
     Assert.Equal(value0.Id, value1.Id);
   }
 

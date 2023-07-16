@@ -37,6 +37,11 @@
             New unique typed id.
             </returns>
         </member>
+        <member name="M:TcKs.TypeId.TypeId.GetTypeChars">
+            <summary>
+            Returns slice of memory with characters of type of id.
+            </summary>
+        </member>
         <member name="P:TcKs.TypeId.TypeId.Type">
             <summary>
             The type of id.

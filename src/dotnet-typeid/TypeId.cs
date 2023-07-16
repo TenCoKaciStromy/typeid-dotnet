@@ -41,12 +41,15 @@ public readonly partial struct TypeId {
     => new(type, UUIDNext.Uuid.NewSequential());
 
   /// <summary>
-  /// The type of id.
+  /// Returns slice of memory with characters of type of id.
   /// </summary>
-  public ReadOnlyMemory<char> Type
+  public ReadOnlyMemory<char> GetTypeChars()
     => type;
 
-  public string TypeString
+  /// <summary>
+  /// The type of id.
+  /// </summary>
+  public string Type
     => type.ToString();
 
   /// <summary>
