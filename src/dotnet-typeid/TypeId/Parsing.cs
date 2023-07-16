@@ -94,11 +94,13 @@ partial struct TypeId {
 
     result = new(input, (byte)ndxSeparator);
     return true;
-      
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static bool Fail(out TypeId result) {
       result = default;
       return false;
     }
   }
+  
+  private static readonly string Alphabet = "0123456789abcdefghjkmnpqrstvwxyz";
 }
