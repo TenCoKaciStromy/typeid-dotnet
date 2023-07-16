@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace TcKs.TypeId; 
 
@@ -62,9 +64,6 @@ partial struct TypeId {
   /// Otherwise false.
   /// </returns>
   public static bool TryParse(string input, out TypeId result) {
-    if (input is null)
-      return Fail(out result);
-
     var inputLength = input.Length;
     if (inputLength < MinTotalLength)
       return Fail(out result);
@@ -77,31 +76,53 @@ partial struct TypeId {
     var idLength = inputLength - ndxId;
     if (idLength != IdPartLength)
       return Fail(out result);
-
-    var prefix = input.Substring(0, ndxSeparator);
-    for (var i = prefix.Length - 1; i >= 0; i--) {
-      if (!AllowedPrefixCharacters.Contains(prefix[i]))
+      
+    // checking characters in type
+    for (var i = ndxSeparator - 1; i >= 0; i--) {
+      if (input[i] is < 'a' or > 'z')
         return Fail(out result);
     }
-
-    var idPart = input.AsMemory().Slice(ndxId).Span;
     
-    // Check for overflow.
-    if (idPart[0] is < '0' or > '7') {
+    var ndxId0 = ndxSeparator + 1;
+    // checking id bytes overflow
+    if (input[ndxId0] is not '0' and not '7')
       return Fail(out result);
-    }
-
-    if (Base32.TryDecode(idPart, out var idBytes) is false || idBytes is null)
+      
+    // checking characters in id
+    if (!Base32.CanDecode(input.AsSpan(ndxId0)))
       return Fail(out result);
 
-    var uuidBytes = SwapEndians(idBytes);
-
-    result = new(input.Substring(0, ndxSeparator), new(uuidBytes));
+    result = new(input, (byte)ndxSeparator);
     return true;
-    
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    static bool IdCharIsValid(char ch) {
+      if (ch >= '0' && ch <= '9')
+        return true;
+
+      if (ch >= 'a' && ch <= 'z') {
+        return ch != 'i'
+               && ch != 'l'
+               && ch != 'o'
+               && ch != 'u';
+      }
+
+      return false;
+    }
+    // static bool IdCharIsValid(char ch)
+    //   => ch is >= '0' and <= '9'
+    //      || ch is >= 'a' and <= 'h'
+    //      || ch is >= 'j' and <= 'k'
+    //      || ch is >= 'm' and <= 'n'
+    //      || ch is >= 'p' and <= 't'
+    //      || ch is >= 'v' and <= 'z';
+      
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static bool Fail(out TypeId result) {
       result = default;
       return false;
     }
   }
+  
+  private static readonly string Alphabet = "0123456789abcdefghjkmnpqrstvwxyz";
 }

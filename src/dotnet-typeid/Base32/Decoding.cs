@@ -11,6 +11,9 @@ partial class Base32 {
       
   public static bool TryDecode(string input, out byte[]? output)
     => TryDecode(input.AsSpan(), out output);
+    
+  public static bool CanDecode(string input)
+    => TryDecode(input.AsSpan(), stackalloc byte[16]);
   
   public static byte[] Decode(ReadOnlyMemory<char> input)
     => TryDecode(input, out var output) is true && output is not null
@@ -25,18 +28,27 @@ partial class Base32 {
       ? output
       : throw new FormatException("Input can not be decoded.");
       
-  public static bool TryDecode(ReadOnlySpan<char> input, out byte[]? output) {
+  public static bool Decode(ReadOnlySpan<char> input, Span<byte> output)
+    => TryDecode(input, output)
+      ? true
+      : throw new FormatException("Input can not be decoded.");
+
+  public static bool TryDecode(ReadOnlySpan<char> input, out byte[]? output)
+    => TryDecode(input, (output = new byte[16]).AsSpan());
+
+  public static bool CanDecode(ReadOnlySpan<char> input)
+    => TryDecode(input, stackalloc byte[16]);
+    
+  public static bool TryDecode(ReadOnlySpan<char> input, Span<byte> output) {
     if (input.Length != 26)
-      return Fail(out output);
+      return false;
       
-    var inputBytes = new byte[26];
-    if (System.Text.Encoding.UTF8.GetBytes(input, inputBytes.AsSpan()) != 26)
-      return Fail(out output);
+    Span<byte> inputBytes = stackalloc byte[26];
+    if (System.Text.Encoding.UTF8.GetBytes(input, inputBytes) != 26)
+      return false;
 
     if (!AllInputBytesAreOk(inputBytes))
-      return Fail(out output);
-
-    output = new byte[16];
+      return false;
 
     var v = inputBytes;
     var dec = DecBytes;
@@ -64,7 +76,7 @@ partial class Base32 {
     return true;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static bool AllInputBytesAreOk(byte[] inputBytes)
+    static bool AllInputBytesAreOk(Span<byte> inputBytes)
       => DecBytes is { } decBytes
          && decBytes[inputBytes[0]] != 0xFF
          && decBytes[inputBytes[1]] != 0xFF
@@ -92,11 +104,5 @@ partial class Base32 {
          && decBytes[inputBytes[23]] != 0xFF
          && decBytes[inputBytes[24]] != 0xFF
          && decBytes[inputBytes[25]] != 0xFF;
-    
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static bool Fail(out byte[]? output) {
-      output = default!;
-      return false;
-    }
   }
 }

@@ -1,0 +1,28 @@
+// * Summary *
+
+BenchmarkDotNet v0.13.6, Ubuntu 22.04.2 LTS (Jammy Jellyfish)
+Intel Core i7-10875H CPU 2.30GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 6.0.120
+  [Host]     : .NET 6.0.20 (6.0.2023.32301), X64 RyuJIT AVX2
+  DefaultJob : .NET 6.0.20 (6.0.2023.32301), X64 RyuJIT AVX2
+
+
+|   Method | Iterations | PrefixLength |     Mean |    Error |   StdDev | Allocated |
+|--------- |----------- |------------- |---------:|---------:|---------:|----------:|
+| TryParse |    1000000 |            5 | 61.98 ms | 0.187 ms | 0.166 ms |     108 B |
+| TryParse |    1000000 |           10 | 64.70 ms | 0.137 ms | 0.107 ms |     235 B |
+| TryParse |    1000000 |           63 | 92.56 ms | 0.328 ms | 0.307 ms |     252 B |
+
+// * Hints *
+Outliers
+  TypeIdBenchmarks.TryParse: Default -> 1 outlier  was  removed (63.43 ms)
+  TypeIdBenchmarks.TryParse: Default -> 3 outliers were removed, 4 outliers were detected (64.40 ms, 65.19 ms..65.32 ms)
+
+// * Legends *
+  Iterations   : Value of the 'Iterations' parameter
+  PrefixLength : Value of the 'PrefixLength' parameter
+  Mean         : Arithmetic mean of all measurements
+  Error        : Half of 99.9% confidence interval
+  StdDev       : Standard deviation of all measurements
+  Allocated    : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ms         : 1 Millisecond (0.001 sec)

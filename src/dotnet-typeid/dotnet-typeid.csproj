@@ -18,8 +18,11 @@
         <PackageTags>guid uuid id typeid type-id</PackageTags>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <DocumentationFile>TcKs.TypeId.xml</DocumentationFile>
-        <Version>1.2.0</Version>
-        <PackageReleaseNotes>Adopted for better use in the command line.</PackageReleaseNotes>
+        <Version>1.3.0</Version>
+        <PackageReleaseNotes>
+            Drastic improvement in performance.
+            Most hot paths are without any allocations.
+        </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 

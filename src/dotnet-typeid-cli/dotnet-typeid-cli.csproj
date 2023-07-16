@@ -22,8 +22,8 @@
         <RepositoryType>github</RepositoryType>
         <PackageTags>guid uuid id typeid type-id cli</PackageTags>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <Version>1.2.0</Version>
-        <PackageReleaseNotes>First public release of CLI of .NET TypeID.</PackageReleaseNotes>
+        <Version>1.3.0</Version>
+        <PackageReleaseNotes>Drastic improvement in performance.</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 

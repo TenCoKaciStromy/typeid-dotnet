@@ -1,0 +1,36 @@
+// * Summary *
+
+BenchmarkDotNet v0.13.6, Ubuntu 22.04.2 LTS (Jammy Jellyfish)
+Intel Core i7-10875H CPU 2.30GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 6.0.120
+  [Host]     : .NET 6.0.20 (6.0.2023.32301), X64 RyuJIT AVX2
+  DefaultJob : .NET 6.0.20 (6.0.2023.32301), X64 RyuJIT AVX2
+
+
+|   Method | Iterations | PrefixLength |     Mean |   Error |  StdDev |       Gen0 |       Gen1 |   Allocated |
+|--------- |----------- |------------- |---------:|--------:|--------:|-----------:|-----------:|------------:|
+|    NewId |    1000000 |            5 | 767.0 ms | 2.67 ms | 2.37 ms |          - |          - |      2720 B |
+| TryParse |    1000000 |            5 | 100.2 ms | 0.30 ms | 0.27 ms | 10400.0000 |          - |  88000195 B |
+|    NewId |    1000000 |           10 | 754.6 ms | 1.89 ms | 1.77 ms |          - |          - |       976 B |
+| TryParse |    1000000 |           10 | 108.7 ms | 0.27 ms | 0.22 ms | 12400.0000 |          - | 104001805 B |
+|    NewId |    1000000 |           63 | 750.8 ms | 2.65 ms | 2.35 ms |          - |          - |      1512 B |
+| TryParse |    1000000 |           63 | 170.0 ms | 0.82 ms | 0.76 ms | 24666.6667 | 24666.6667 | 208003008 B |
+
+// * Hints *
+Outliers
+  TypeIdBenchmarks.NewId: Default    -> 1 outlier  was  removed (773.45 ms)
+  TypeIdBenchmarks.TryParse: Default -> 1 outlier  was  removed (101.34 ms)
+  TypeIdBenchmarks.NewId: Default    -> 1 outlier  was  detected (749.92 ms)
+  TypeIdBenchmarks.TryParse: Default -> 2 outliers were removed (109.85 ms, 117.65 ms)
+  TypeIdBenchmarks.NewId: Default    -> 1 outlier  was  removed (765.19 ms)
+
+// * Legends *
+  Iterations   : Value of the 'Iterations' parameter
+  PrefixLength : Value of the 'PrefixLength' parameter
+  Mean         : Arithmetic mean of all measurements
+  Error        : Half of 99.9% confidence interval
+  StdDev       : Standard deviation of all measurements
+  Gen0         : GC Generation 0 collects per 1000 operations
+  Gen1         : GC Generation 1 collects per 1000 operations
+  Allocated    : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ms         : 1 Millisecond (0.001 sec)
