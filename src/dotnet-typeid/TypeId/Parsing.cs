@@ -94,28 +94,6 @@ partial struct TypeId {
 
     result = new(input, (byte)ndxSeparator);
     return true;
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static bool IdCharIsValid(char ch) {
-      if (ch >= '0' && ch <= '9')
-        return true;
-
-      if (ch >= 'a' && ch <= 'z') {
-        return ch != 'i'
-               && ch != 'l'
-               && ch != 'o'
-               && ch != 'u';
-      }
-
-      return false;
-    }
-    // static bool IdCharIsValid(char ch)
-    //   => ch is >= '0' and <= '9'
-    //      || ch is >= 'a' and <= 'h'
-    //      || ch is >= 'j' and <= 'k'
-    //      || ch is >= 'm' and <= 'n'
-    //      || ch is >= 'p' and <= 't'
-    //      || ch is >= 'v' and <= 'z';
       
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static bool Fail(out TypeId result) {
@@ -123,6 +101,4 @@ partial struct TypeId {
       return false;
     }
   }
-  
-  private static readonly string Alphabet = "0123456789abcdefghjkmnpqrstvwxyz";
 }
