@@ -12,7 +12,7 @@ partial struct TypeId : IEquatable<TypeId> {
       const uint baseCode = 2166136261;
       const int nextCode = 16777619;
 
-      var typeCode = type?.GetHashCode() ?? 1;
+      var typeCode = type.GetHashCode();
       if (typeCode == 0) typeCode = 1;
       typeCode *= nextCode;
 
@@ -33,7 +33,7 @@ partial struct TypeId : IEquatable<TypeId> {
   /// </param>
   /// <returns></returns>
   public bool Equals(TypeId other)
-    => id == other.id && (type ?? string.Empty) == (other.type ?? string.Empty);
+    => id.Equals(other.id) && type.Span.SequenceEqual(other.type.Span);
 
   /// <summary>
   /// Returns true if both this typed id and <paramref name="obj"/> are equals.

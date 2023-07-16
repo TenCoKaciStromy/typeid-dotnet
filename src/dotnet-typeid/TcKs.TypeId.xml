@@ -14,6 +14,13 @@
             Represents typed id.
             </summary>
         </member>
+        <member name="M:TcKs.TypeId.TypeId.#ctor(System.ReadOnlyMemory{System.Char},System.Guid)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="type">The type of id.</param>
+            <param name="id">The id.</param>
+        </member>
         <member name="M:TcKs.TypeId.TypeId.#ctor(System.String,System.Guid)">
             <summary>
             Constructor.

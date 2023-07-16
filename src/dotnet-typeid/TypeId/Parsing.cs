@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace TcKs.TypeId; 
 
@@ -62,14 +63,23 @@ partial struct TypeId {
   /// Otherwise false.
   /// </returns>
   public static bool TryParse(string input, out TypeId result) {
-    if (input is null)
-      return Fail(out result);
+    if (input is null) {
+      result = default;
+      return false;
+    }
 
+    var chars = input.ToCharArray();
+    return TryParseNoAlloc(chars, out result);
+  }
+
+  public static bool TryParseNoAlloc(ReadOnlyMemory<char> input, out TypeId result) {
     var inputLength = input.Length;
     if (inputLength < MinTotalLength)
       return Fail(out result);
 
-    var ndxSeparator = input.IndexOf(PartsSeparator);
+    var inputSpan = input.Span;
+
+    var ndxSeparator = inputSpan.IndexOf(PartsSeparator);
     if (ndxSeparator is < 0 or > MaxPrefixLength)
       return Fail(out result);
 
@@ -78,25 +88,32 @@ partial struct TypeId {
     if (idLength != IdPartLength)
       return Fail(out result);
 
-    var prefix = input.Substring(0, ndxSeparator);
-    for (var i = prefix.Length - 1; i >= 0; i--) {
-      if (!AllowedPrefixCharacters.Contains(prefix[i]))
+    var prefix = input.Slice(0, ndxSeparator);
+    var prefixSpan = prefix.Span;
+    for (var i = prefixSpan.Length - 1; i >= 0; i--) {
+      var ch = prefixSpan[i];
+      if (ch is < 'a' or > 'z') {
         return Fail(out result);
+      }
     }
 
-    var idPart = input.AsMemory().Slice(ndxId).Span;
+    var idPart = input.Slice(ndxId).Span;
     
     // Check for overflow.
     if (idPart[0] is < '0' or > '7') {
       return Fail(out result);
     }
 
-    if (Base32.TryDecode(idPart, out var idBytes) is false || idBytes is null)
+    // if (Base32.TryDecode(idPart, out var idBytes) is false || idBytes is null)
+    //   return Fail(out result);
+    Span<byte> idBytes = stackalloc byte[16];
+    if (Base32.TryDecode(idPart, idBytes) is false)
       return Fail(out result);
 
-    var uuidBytes = SwapEndians(idBytes);
+    Span<byte> uuidBytes = stackalloc byte[16];
+    SwapEndians(idBytes, uuidBytes);
 
-    result = new(input.Substring(0, ndxSeparator), new(uuidBytes));
+    result = new(prefix, new(uuidBytes));
     return true;
     
     static bool Fail(out TypeId result) {

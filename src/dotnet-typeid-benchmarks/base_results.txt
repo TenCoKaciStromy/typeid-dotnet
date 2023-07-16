@@ -1,0 +1,34 @@
+// * Summary *
+
+BenchmarkDotNet v0.13.6, Ubuntu 22.04.2 LTS (Jammy Jellyfish)
+Intel Core i7-10875H CPU 2.30GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 6.0.120
+  [Host]     : .NET 6.0.20 (6.0.2023.32301), X64 RyuJIT AVX2
+  DefaultJob : .NET 6.0.20 (6.0.2023.32301), X64 RyuJIT AVX2
+
+
+|   Method | Iterations | PrefixLength |     Mean |   Error |  StdDev |       Gen0 |    Allocated |
+|--------- |----------- |------------- |---------:|--------:|--------:|-----------:|-------------:|
+|    NewId |    1000000 |            5 | 746.8 ms | 2.84 ms | 2.65 ms |          - |      1.46 KB |
+| TryParse |    1000000 |            5 | 143.1 ms | 0.47 ms | 0.44 ms | 23750.0000 | 195313.06 KB |
+|    NewId |    1000000 |           10 | 746.5 ms | 1.27 ms | 1.12 ms |          - |      3.02 KB |
+| TryParse |    1000000 |           10 | 163.8 ms | 0.22 ms | 0.19 ms | 27500.0000 | 226562.96 KB |
+|    NewId |    1000000 |           63 | 713.7 ms | 2.21 ms | 2.07 ms |          - |      1.46 KB |
+| TryParse |    1000000 |           63 | 431.9 ms | 1.99 ms | 1.86 ms | 52000.0000 | 429688.98 KB |
+
+// * Hints *
+Outliers
+  TypeIdBenchmarks.TryParse: Default -> 1 outlier  was  detected (141.83 ms)
+  TypeIdBenchmarks.NewId: Default    -> 1 outlier  was  removed (752.28 ms)
+  TypeIdBenchmarks.TryParse: Default -> 2 outliers were removed (164.53 ms, 164.55 ms)
+  TypeIdBenchmarks.TryParse: Default -> 1 outlier  was  detected (426.26 ms)
+
+// * Legends *
+  Iterations   : Value of the 'Iterations' parameter
+  PrefixLength : Value of the 'PrefixLength' parameter
+  Mean         : Arithmetic mean of all measurements
+  Error        : Half of 99.9% confidence interval
+  StdDev       : Standard deviation of all measurements
+  Gen0         : GC Generation 0 collects per 1000 operations
+  Allocated    : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ms         : 1 Millisecond (0.001 sec)

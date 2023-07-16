@@ -24,19 +24,20 @@ partial class Base32 {
     => TryDecode(input, out var output) is true && output is not null
       ? output
       : throw new FormatException("Input can not be decoded.");
-      
-  public static bool TryDecode(ReadOnlySpan<char> input, out byte[]? output) {
+
+  public static bool TryDecode(ReadOnlySpan<char> input, out byte[]? output)
+    => TryDecode(input, (output = new byte[16]).AsSpan());
+
+  public static bool TryDecode(ReadOnlySpan<char> input, Span<byte> output) {
     if (input.Length != 26)
-      return Fail(out output);
+      return false;
       
-    var inputBytes = new byte[26];
-    if (System.Text.Encoding.UTF8.GetBytes(input, inputBytes.AsSpan()) != 26)
-      return Fail(out output);
+    Span<byte> inputBytes = stackalloc byte[26];
+    if (System.Text.Encoding.UTF8.GetBytes(input, inputBytes) != 26)
+      return false;
 
     if (!AllInputBytesAreOk(inputBytes))
-      return Fail(out output);
-
-    output = new byte[16];
+      return false;
 
     var v = inputBytes;
     var dec = DecBytes;
@@ -64,7 +65,7 @@ partial class Base32 {
     return true;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static bool AllInputBytesAreOk(byte[] inputBytes)
+    static bool AllInputBytesAreOk(Span<byte> inputBytes)
       => DecBytes is { } decBytes
          && decBytes[inputBytes[0]] != 0xFF
          && decBytes[inputBytes[1]] != 0xFF

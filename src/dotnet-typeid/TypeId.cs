@@ -6,7 +6,8 @@ namespace TcKs.TypeId;
 /// Represents typed id.
 /// </summary>
 public readonly partial struct TypeId {   
-  private readonly string? type;
+  // private readonly string? type;
+  private readonly ReadOnlyMemory<char> type;
   private readonly Guid id;
 
   /// <summary>
@@ -14,8 +15,18 @@ public readonly partial struct TypeId {
   /// </summary>
   /// <param name="type">The type of id.</param>
   /// <param name="id">The id.</param>
-  public TypeId(string type, Guid id) {
+  public TypeId(ReadOnlyMemory<char> type, Guid id) {
     this.type = type;
+    this.id = id;
+  }
+  
+  /// <summary>
+  /// Constructor.
+  /// </summary>
+  /// <param name="type">The type of id.</param>
+  /// <param name="id">The id.</param>
+  public TypeId(string type, Guid id) {
+    this.type = (type ?? string.Empty).AsMemory();
     this.id = id;
   }
   
@@ -32,8 +43,11 @@ public readonly partial struct TypeId {
   /// <summary>
   /// The type of id.
   /// </summary>
-  public string Type
-    => type ?? string.Empty;
+  public ReadOnlyMemory<char> Type
+    => type;
+
+  public string TypeString
+    => type.ToString();
 
   /// <summary>
   /// The id.

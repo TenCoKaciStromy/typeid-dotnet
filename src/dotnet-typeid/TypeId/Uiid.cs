@@ -27,4 +27,17 @@ partial struct TypeId {
 
     return result;
   }
+  
+  static void SwapEndians(Span<byte> guid, Span<byte> result) {
+    guid.CopyTo(result);
+    
+    result[7] = guid[6];
+    result[6] = guid[7];
+    result[5] = guid[4];
+    result[4] = guid[5];
+    result[3] = guid[0];
+    result[2] = guid[1];
+    result[1] = guid[2];
+    result[0] = guid[3];
+  }
 }

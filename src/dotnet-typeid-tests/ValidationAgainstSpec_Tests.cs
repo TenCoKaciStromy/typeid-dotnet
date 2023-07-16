@@ -72,7 +72,7 @@ public class ValidationAgainstSpec_Tests {
     // fmt.Printf("Prefix: %s\nSuffix: %s\n", tid.Type(), tid.suffix)
     outer.WriteLine($"Prefix: {tid.Type}\nSuffix: {tid.Suffix}");
     
-    Assert.Equal("prefix", tid.Type);
+    Assert.Equal("prefix", tid.TypeString);
     Assert.Equal("00041061050r3gg28a1c60t3gg", tid.Suffix);
   }
 
