@@ -101,6 +101,4 @@ partial struct TypeId {
       return false;
     }
   }
-  
-  private static readonly string Alphabet = "0123456789abcdefghjkmnpqrstvwxyz";
 }
