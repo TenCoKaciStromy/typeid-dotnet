@@ -6,7 +6,7 @@ namespace dotnet_typeid_benchmarks;
 [MemoryDiagnoser]
 public class TypeIdBenchmarks {
   // [Params(1, 10, 100, 1_000, 10_000, 100_000, 1_000_000)]
-  [Params(10_000)]
+  [Params(1_000_000)]
   public int Iterations;
 
   [Params(5, 10, 63)]
@@ -49,7 +49,7 @@ public class TypeIdBenchmarks {
   public TypeId TryParse()
   {
     TypeId typeId = default;
-
+  
     var arr = typeIdStrings!;
     for (var i = arr.Length - 1; i >= 0; i--) {
       TypeId.TryParse(arr[i], out typeId);
@@ -57,18 +57,18 @@ public class TypeIdBenchmarks {
         
     return typeId;
   }
-  
-  [Benchmark]
-  public TypeId TryParseOne()
-  {
-    TypeId typeId = default;
 
-    var str = typeIdStrings![0];
-    var max = Iterations;
-    for (var i = 0; i < max; i++) {
-      TypeId.TryParse(str, out typeId);
-    }
-        
-    return typeId;
-  }
+  // [Benchmark]
+  // public TypeId TryParseOne()
+  // {
+  //   TypeId typeId = default;
+  //
+  //   var str = typeIdStrings![0];
+  //   var max = Iterations;
+  //   for (var i = 0; i < max; i++) {
+  //     TypeId.TryParse(str, out typeId);
+  //   }
+  //       
+  //   return typeId;
+  // }
 }

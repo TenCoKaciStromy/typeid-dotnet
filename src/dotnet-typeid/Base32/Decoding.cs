@@ -11,6 +11,9 @@ partial class Base32 {
       
   public static bool TryDecode(string input, out byte[]? output)
     => TryDecode(input.AsSpan(), out output);
+    
+  public static bool CanDecode(string input)
+    => TryDecode(input.AsSpan(), stackalloc byte[16]);
   
   public static byte[] Decode(ReadOnlyMemory<char> input)
     => TryDecode(input, out var output) is true && output is not null
@@ -24,10 +27,18 @@ partial class Base32 {
     => TryDecode(input, out var output) is true && output is not null
       ? output
       : throw new FormatException("Input can not be decoded.");
+      
+  public static bool Decode(ReadOnlySpan<char> input, Span<byte> output)
+    => TryDecode(input, output)
+      ? true
+      : throw new FormatException("Input can not be decoded.");
 
   public static bool TryDecode(ReadOnlySpan<char> input, out byte[]? output)
     => TryDecode(input, (output = new byte[16]).AsSpan());
 
+  public static bool CanDecode(ReadOnlySpan<char> input)
+    => TryDecode(input, stackalloc byte[16]);
+    
   public static bool TryDecode(ReadOnlySpan<char> input, Span<byte> output) {
     if (input.Length != 26)
       return false;

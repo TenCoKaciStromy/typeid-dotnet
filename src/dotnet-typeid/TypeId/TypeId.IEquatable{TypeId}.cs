@@ -7,22 +7,8 @@ partial struct TypeId : IEquatable<TypeId> {
   /// Returns hash code of this typed id.
   /// </summary>
   /// <returns></returns>
-  public override int GetHashCode() {
-    unchecked {
-      const uint baseCode = 2166136261;
-      const int nextCode = 16777619;
-
-      var typeCode = type.GetHashCode();
-      if (typeCode == 0) typeCode = 1;
-      typeCode *= nextCode;
-
-      var idCode = id.GetHashCode();
-      if (idCode == 0) idCode = 1;
-      idCode *= nextCode;
-
-      return (int)(baseCode * typeCode * idCode);
-    }
-  }
+  public override int GetHashCode()
+    => text?.GetHashCode() ?? -1;
 
   /// <summary>
   /// Returns true if both this typed id and <paramref name="other"/> are equals.
@@ -33,7 +19,7 @@ partial struct TypeId : IEquatable<TypeId> {
   /// </param>
   /// <returns></returns>
   public bool Equals(TypeId other)
-    => id.Equals(other.id) && type.Span.SequenceEqual(other.type.Span);
+    => text.Equals(other.text, StringComparison.Ordinal);
 
   /// <summary>
   /// Returns true if both this typed id and <paramref name="obj"/> are equals.
